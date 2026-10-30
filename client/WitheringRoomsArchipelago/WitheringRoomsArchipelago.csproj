@@ -1,0 +1,63 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFramework>net6.0</TargetFramework>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>enable</Nullable>
+		<CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
+        <WitheringRoomsGameDirectory Condition="&apos;$(WitheringRoomsGameDirectory)&apos; == &apos;&apos;">$(WR_GAME_DIR)</WitheringRoomsGameDirectory>
+	</PropertyGroup>
+
+	<ItemGroup>
+	  <PackageReference Include="Archipelago.MultiClient.Net" Version="6.7.1" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Reference Include="0Harmony">
+	    <HintPath>$(WitheringRoomsGameDirectory)\BepInEx\core\0Harmony.dll</HintPath>
+	  </Reference>
+	  <Reference Include="BepInEx.Core">
+	    <HintPath>$(WitheringRoomsGameDirectory)\BepInEx\core\BepInEx.Core.dll</HintPath>
+	  </Reference>
+	  <Reference Include="BepInEx.Unity.IL2CPP">
+	    <HintPath>$(WitheringRoomsGameDirectory)\BepInEx\core\BepInEx.Unity.IL2CPP.dll</HintPath>
+	  </Reference>
+	  <Reference Include="Il2CppInterop.Runtime">
+	    <HintPath>$(WitheringRoomsGameDirectory)\BepInEx\core\Il2CppInterop.Runtime.dll</HintPath>
+	  </Reference>
+	  <Reference Include="Il2Cppmscorlib">
+	    <HintPath>$(WitheringRoomsGameDirectory)\BepInEx\interop\Il2Cppmscorlib.dll</HintPath>
+	  </Reference>
+	  <Reference Include="NightingaleScripts">
+	    <HintPath>$(WitheringRoomsGameDirectory)\BepInEx\interop\NightingaleScripts.dll</HintPath>
+	  </Reference>
+	  <Reference Include="Unity.TextMeshPro">
+	    <HintPath>$(WitheringRoomsGameDirectory)\BepInEx\interop\Unity.TextMeshPro.dll</HintPath>
+	  </Reference>
+	  <Reference Include="UnityEngine.CoreModule">
+	    <HintPath>$(WitheringRoomsGameDirectory)\BepInEx\interop\UnityEngine.CoreModule.dll</HintPath>
+	  </Reference>
+	  <Reference Include="UnityEngine.ImageConversionModule">
+	    <HintPath>$(WitheringRoomsGameDirectory)\BepInEx\interop\UnityEngine.ImageConversionModule.dll</HintPath>
+	  </Reference>
+	  <Reference Include="UnityEngine.IMGUIModule">
+	    <HintPath>$(WitheringRoomsGameDirectory)\BepInEx\interop\UnityEngine.IMGUIModule.dll</HintPath>
+	  </Reference>
+	  <Reference Include="UnityEngine.InputLegacyModule">
+	    <HintPath>$(WitheringRoomsGameDirectory)\BepInEx\interop\UnityEngine.InputLegacyModule.dll</HintPath>
+	  </Reference>
+	  <Reference Include="UnityEngine.TextRenderingModule">
+	    <HintPath>$(WitheringRoomsGameDirectory)\BepInEx\interop\UnityEngine.TextRenderingModule.dll</HintPath>
+	  </Reference>
+	  <Reference Include="UnityEngine.UI">
+	    <HintPath>$(WitheringRoomsGameDirectory)\BepInEx\interop\UnityEngine.UI.dll</HintPath>
+	  </Reference>
+	</ItemGroup>
+
+  <Target Name="VerifyGameReferences" BeforeTargets="ResolveReferences">
+    <Error Condition="'$(WitheringRoomsGameDirectory)' == ''"
+           Text="Specify WR_GAME_DIR (full folder containing Withering Rooms.exe) or -p:WitheringRoomsGameDirectory=..." />
+    <Error Condition="!Exists('$(WitheringRoomsGameDirectory)\BepInEx\interop\NightingaleScripts.dll')"
+           Text="Missing BepInEx IL2CPP generated interop assemblies. Launch the game once with BepInEx installed." />
+  </Target>
+</Project>

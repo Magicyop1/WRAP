@@ -1,0 +1,22 @@
+# Build products and local game assemblies
+**/bin/
+**/obj/
+**/__pycache__/
+*.pyc
+*.pdb
+*.user
+*.suo
+.vs/
+.idea/
+.vscode/
+**/dist/
+*.apworld
+# Never check in private save data or server connection settings
+BepInEx/
+ArchipelagoCensus/
+*LogOutput*
+*.sav
+*.saves
+*.log
+*.bak
+# Repo release artifacts are uploaded using GitHub Releases
